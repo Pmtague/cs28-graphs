@@ -86,17 +86,29 @@ class Graph:
                     s.push(next_vert)
 
     # Print each vertex in depth-first order beginning from starting_vertex.
-    def dft_recursive(self, starting_vertex):
-        
-        
 
+    def dft_recursive(self, starting_vertex, visited = None):
+        
+        # Initialize an empty set for visited vertices
+        if visited is None:
+            visited = set()
+        
+        # Add the starting vertex to visited
+        visited.add(starting_vertex)
+        print(starting_vertex)
+
+        # Skip using a stack and loop through the neighbors
+        for next_vert in self.get_neighbors(starting_vertex):
+
+            # If the neighbor hasn't been visited
+            if next_vert not in visited:
+
+                # Run the entire function on the next_vert
+                self.dft_recursive(next_vert, visited)
+
+    # Return a list containing the shortest path from starting_vertex to destination_vertex in breath-first order.
     def bfs(self, starting_vertex, destination_vertex):
-        """
-        Return a list containing the shortest path from
-        starting_vertex to destination_vertex in
-        breath-first order.
-        """
-        pass  # TODO
+        
 
     def dfs(self, starting_vertex, destination_vertex):
         """
