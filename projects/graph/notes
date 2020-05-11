@@ -1,0 +1,21 @@
+Breadth-First Traversal Algorithm
+
+Add starting node to a queue
+
+While queue isn't empty:
+	Dequeue the first vert
+	If that vert isn't visited:
+		Mark as visited
+		Add all its unvisted neighbors to the queue
+
+
+
+Depth-First Traversal Algorithm
+
+Add starting node to a stack
+
+While stack isn't empty:
+	Pop the first vert
+	If that vert isn't visited:
+		Mark as visited
+		Push all its unvisted neighbors to the stack

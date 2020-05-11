@@ -10,28 +10,51 @@ class Graph:
         self.vertices = {}
 
     def add_vertex(self, vertex_id):
-        """
-        Add a vertex to the graph.
-        """
+        self.vertices[vertex_id] = set()    # Set of edges
         pass  # TODO
 
     def add_edge(self, v1, v2):
-        """
-        Add a directed edge to the graph.
-        """
-        pass  # TODO
+        # Add a directed edge to the graph (v1 to v2)
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            raise IndexError("Vertex does not exist in graph")
 
     def get_neighbors(self, vertex_id):
-        """
-        Get all neighbors (edges) of a vertex.
-        """
+        return self.vertices[vertex_id]
         pass  # TODO
 
+# g = Graph()
+# g.add_vertex(99)
+# g.add_vertex(3)
+# g.add_edge(99, 3)
+# g.add_edge(3, 99)
+
+# print(g.get_neighbors(99))
+# print(g.get_neighbors(3))
+
     def bft(self, starting_vertex):
-        """
-        Print each vertex in breadth-first order
-        beginning from starting_vertex.
-        """
+        q = Queue()
+        q.enqueue(starting_vertex)
+
+        # Keep track of visited nodes
+        visited = set()
+
+        # Repeat until queue is empty
+        while q.size() > 0:
+
+            # Dequeue first vertex
+            v = q.dequeue()
+
+            # If it's not visited:
+            if v not in visited:
+                print(v)
+
+                # Mark visited
+                visited.add(v)
+
+                for next_vert in self.get_neighbors(v):
+                    q.enqueue(next_vert)
         pass  # TODO
 
     def dft(self, starting_vertex):
