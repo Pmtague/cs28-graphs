@@ -109,6 +109,33 @@ class Graph:
     # Return a list containing the shortest path from starting_vertex to destination_vertex in breath-first order.
     def bfs(self, starting_vertex, destination_vertex):
         
+        # Instantiate an empty queue
+        q = Queue()
+
+        # Add the starting vertex to the queue
+        q.enqueue(starting_vertex)
+
+        # Initialize an empty list for the path
+        path = []
+
+        # Repeat until queue is empty
+        while destination_vertex not in path:
+
+            # Dequeue first vertex
+            v = q.dequeue()
+
+            # If it's not visited:
+            if v not in path:
+
+                # Add to path
+                path.append(v)
+
+                print("Path", path)
+
+                # Enqueue all unvisited neighbors to the queue
+                for next_vert in self.get_neighbors(v):
+                    if self.get_neighbors(next_vert):
+                        q.enqueue(next_vert)
 
     def dfs(self, starting_vertex, destination_vertex):
         """
