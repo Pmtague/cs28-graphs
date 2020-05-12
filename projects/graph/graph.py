@@ -109,33 +109,46 @@ class Graph:
     # Return a list containing the shortest path from starting_vertex to destination_vertex in breath-first order.
     def bfs(self, starting_vertex, destination_vertex):
         
+        # Add starting vertex to the path
+        path = [starting_vertex]
+
         # Instantiate an empty queue
         q = Queue()
 
-        # Add the starting vertex to the queue
-        q.enqueue(starting_vertex)
+        # Add path to the queue
+        q.enqueue(path)
 
-        # Initialize an empty list for the path
-        path = []
+        # Initialize an empty set for visited
+        visited = set()
 
         # Repeat until queue is empty
-        while destination_vertex not in path:
+        while q.size() > 0:
 
-            # Dequeue first vertex
-            v = q.dequeue()
+            # Dequeue path
+            path = q.dequeue()
+
+            # Store current vertex in a variable
+            v = path[-1]
 
             # If it's not visited:
-            if v not in path:
+            if v not in visited:
 
-                # Add to path
-                path.append(v)
+                # Add to visited
+                visited.add(v)
+                
+                # Check to see if we have reached our destination
+                if destination_vertex == path[-1]:
+                    return path
 
-                print("Path", path)
+                # Loop through neigbors of current vertex
+                for neighbor in self.get_neighbors(v):
 
-                # Enqueue all unvisited neighbors to the queue
-                for next_vert in self.get_neighbors(v):
-                    if self.get_neighbors(next_vert):
-                        q.enqueue(next_vert)
+                    # Create a new path for each neighbor
+                    new_path = path.copy()
+                    new_path.append(neighbor)
+
+                    # Add the new path(s) to the queue
+                    q.enqueue(new_path)
 
     def dfs(self, starting_vertex, destination_vertex):
         """
